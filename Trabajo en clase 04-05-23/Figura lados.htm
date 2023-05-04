@@ -93,13 +93,13 @@ Crear una geometría personalizada (sacado de ChatGPT)
 const geometry = new THREE.BufferGeometry();
 
 /*
-Define los atributos de la geometría
+Define los atributos de la geometría (sacado de ChatGPT)
 */
 const positionAttribute = new THREE.Float32BufferAttribute(vertices.flat(), 3);
 const indexAttribute = new THREE.Uint16BufferAttribute(indices, 1);
 
 /*
-Calcula las normales de la geometría
+Calculo de las normales de la geometría
 */
 geometry.setIndex(indexAttribute);
 geometry.setAttribute('position', positionAttribute);
@@ -112,12 +112,12 @@ const material = new THREE.MeshBasicMaterial({ color: 0xBA00CA, wireframe: true 
 const mesh = new THREE.Mesh(geometry, material);
 
 /*
-Añade el objeto malla a la escena
+Añade la malla a la escena
 */
 scene.add(mesh);
 
 /*
-Controlador de camara orbitcontrols
+Orbitcontrols
 */
     const controls = new OrbitControls(camera, renderer.domElement);
     const axesHelper = new THREE.AxesHelper( 1000 ); //flechas del plano
@@ -127,7 +127,7 @@ Controlador de camara orbitcontrols
 const divisions = 1000;
 
 /*
-Añadir la malla
+Malla
 */
 const gridHelper = new THREE.GridHelper( size, divisions );
 scene.add( gridHelper );
