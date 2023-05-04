@@ -4,7 +4,7 @@
 
 <head>
   <meta charset="utf-8" />
-  <title>icosaedro</title>
+  <title>Figura varios lados</title>
   <style>
     body {
       margin: 0;
@@ -14,6 +14,9 @@
 
 <body>
   <script type="module">
+    /*
+    Importaciones (Sacado de ChatGPT)
+    */
     import * as THREE from 'https://sebastiann16.github.io/CompG/three.module.js';
     import { OrbitControls } from 'https://sebastiann16.github.io/CompG/OrbitControls.js';
     var WIDTH = window.innerWidth;
@@ -22,13 +25,13 @@
 /*
 Creacion de la escena 
 */
-
     var renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(WIDTH, HEIGHT);
     renderer.setClearColor(0xDDDDDD, 1);
     document.body.appendChild(renderer.domElement);
 
     var scene = new THREE.Scene();
+
 /*
 Posicion de la cámara
 */
@@ -40,25 +43,25 @@ Posicion de la cámara
     scene.add(light);
 
 /*
-Define los vértices del icosaedro
+Define los vértices del icosaedro (Sacado de ChatGPT)
 */
 const vertices = [
-    [-1, 0, 1.618],
-    [1, 0, 1.618],
-    [-1, 0, -1.618],
-    [1, 0, -1.618],
-    [0, 1.618, 1],
-    [0, 1.618, -1],
-    [0, -1.618, 1],
-    [0, -1.618, -1],
-    [1.618, 1, 0],
-    [1.618, -1, 0],
-    [-1.618, 1, 0],
-    [-1.618, -1, 0]
+    [-2, 0, 2],
+    [2, 0, 2],
+    [-2, 0, 2],
+    [2, 0, 2],
+    [0, 2, 2],
+    [0, 2, -2],
+    [0, -2, 2],
+    [0, -2, -2],
+    [2, 2, 0],
+    [2, -2, 0],
+    [-2, 2, 0],
+    [-2, -2, 0]
 ];
 
 /*
-Define los índices de cada una de las caras del icosaedro
+Define los índices de cada una de las caras del icosaedro (Sacado de ChatGPT)
 */
 const indices = 
 [
@@ -105,7 +108,7 @@ geometry.computeVertexNormals();
 /*
 Crea un material y un objeto malla con la geometría
 */
-const material = new THREE.MeshBasicMaterial({ color: 0x003381, wireframe: true });
+const material = new THREE.MeshBasicMaterial({ color: 0xBA00CA, wireframe: true });
 const mesh = new THREE.Mesh(geometry, material);
 
 /*
