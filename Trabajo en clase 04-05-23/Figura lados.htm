@@ -1,0 +1,142 @@
+//Yohan Hernando González Gutiérrez - 6000615
+<!DOCTYPE html>
+<html lang="en-GB">
+
+<head>
+  <meta charset="utf-8" />
+  <title>icosaedro</title>
+  <style>
+    body {
+      margin: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <script type="module">
+    import * as THREE from 'https://sebastiann16.github.io/CompG/three.module.js';
+    import { OrbitControls } from 'https://sebastiann16.github.io/CompG/OrbitControls.js';
+    var WIDTH = window.innerWidth;
+    var HEIGHT = window.innerHeight;
+
+/*
+Creacion de la escena 
+*/
+
+    var renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(WIDTH, HEIGHT);
+    renderer.setClearColor(0xDDDDDD, 1);
+    document.body.appendChild(renderer.domElement);
+
+    var scene = new THREE.Scene();
+/*
+Posicion de la cámara
+*/
+    var camera = new THREE.PerspectiveCamera(70, WIDTH / HEIGHT);
+    camera.position.z = 20;
+    camera.position.y = 5;
+    scene.add(camera);
+    const light = new THREE.AmbientLight(0x404040, 5);
+    scene.add(light);
+
+/*
+Define los vértices del icosaedro
+*/
+const vertices = [
+    [-1, 0, 1.618],
+    [1, 0, 1.618],
+    [-1, 0, -1.618],
+    [1, 0, -1.618],
+    [0, 1.618, 1],
+    [0, 1.618, -1],
+    [0, -1.618, 1],
+    [0, -1.618, -1],
+    [1.618, 1, 0],
+    [1.618, -1, 0],
+    [-1.618, 1, 0],
+    [-1.618, -1, 0]
+];
+
+/*
+Define los índices de cada una de las caras del icosaedro
+*/
+const indices = 
+[
+    0, 4, 1,
+    0, 9, 4,
+    9, 5, 4,
+    4, 5, 8,
+    4, 8, 1,
+    8, 10, 1,
+    8, 3, 10,
+    5, 3, 8,
+    5, 2, 3,
+    2, 7, 3,
+    7, 10, 3,
+    7, 6, 10,
+    7, 11, 6,
+    11, 0, 6,
+    0, 1, 6,
+    6, 1, 10,
+    9, 0, 11,
+    9, 11, 2,
+    9, 2, 5,
+    7, 2, 11
+];
+
+/* 
+Crear una geometría personalizada (sacado de ChatGPT)
+*/
+const geometry = new THREE.BufferGeometry();
+
+/*
+Define los atributos de la geometría
+*/
+const positionAttribute = new THREE.Float32BufferAttribute(vertices.flat(), 3);
+const indexAttribute = new THREE.Uint16BufferAttribute(indices, 1);
+
+/*
+Calcula las normales de la geometría
+*/
+geometry.setIndex(indexAttribute);
+geometry.setAttribute('position', positionAttribute);
+geometry.computeVertexNormals();
+
+/*
+Crea un material y un objeto malla con la geometría
+*/
+const material = new THREE.MeshBasicMaterial({ color: 0x003381, wireframe: true });
+const mesh = new THREE.Mesh(geometry, material);
+
+/*
+Añade el objeto malla a la escena
+*/
+scene.add(mesh);
+
+/*
+Controlador de camara orbitcontrols
+*/
+    const controls = new OrbitControls(camera, renderer.domElement);
+    const axesHelper = new THREE.AxesHelper( 1000 ); //flechas del plano
+    scene.add( axesHelper );
+
+    const size = 1000;
+const divisions = 1000;
+
+/*
+Añadir la malla
+*/
+const gridHelper = new THREE.GridHelper( size, divisions );
+scene.add( gridHelper );
+
+    function animate() {
+
+      requestAnimationFrame(animate);
+      controls.update();
+      renderer.render(scene, camera)
+    }
+    animate();
+  </script>
+</body>
+
+</html>
